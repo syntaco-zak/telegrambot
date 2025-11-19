@@ -1,15 +1,15 @@
 import os
 import django
+from dotenv import load_dotenv
+
+load_dotenv()
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "telegrambot.settings")
+django.setup()
+
 from user_data.models import UserData
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
-from dotenv import load_dotenv
-from user_data.models import UserData
 
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "telegrambot.settings")
-django.setup()
-load_dotenv()
 
 async def start(update, context):
     await update.message.reply_text("Welcome! I am your bot!")
