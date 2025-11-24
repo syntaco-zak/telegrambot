@@ -12,6 +12,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, Messa
 
 PORT = int(os.environ.get("PORT", 8000))
 RENDER_URL = os.getenv("RENDER_EXTERNAL_URL")
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 async def start(update, context):
     await update.message.reply_text("Welcome! I am your bot!")
@@ -25,6 +26,6 @@ app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"(?i)^hello, what i
 app.run_webhook(
     listen="0.0.0.0",
     port=PORT,
-    url_path=os.getenv("TELEGRAM_BOT_TOKEN"),
-    webhook_url=f"{RENDER_URL}/{os.getenv('TELEGRAM_BOT_TOKEN')}",
+    url_path=f"webhook/{TOKEN}",
+    webhook_url=f"{RENDER_URL}/webhook/{TOKEN}",
 )
