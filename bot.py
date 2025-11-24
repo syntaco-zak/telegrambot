@@ -10,6 +10,8 @@ from user_data.models import UserData
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 
+PORT = int(os.environ.get("PORT", 8000))
+RENDER_URL = os.getenv("RENDER_EXTERNAL_URL")
 
 async def start(update, context):
     await update.message.reply_text("Welcome! I am your bot!")
