@@ -20,4 +20,9 @@ async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 app = ApplicationBuilder().token(os.getenv("TELEGRAM_BOT_TOKEN")).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & filters.Regex(r"(?i)^hello, what is my name\??$"), hello))
-app.run_polling()
+app.run_webhook(
+    listen="0.0.0.0",
+    port=PORT,
+    url_path=os.getenv("TELEGRAM_BOT_TOKEN"),
+    webhook_url=f"{RENDER_URL}/{os.getenv('TELEGRAM_BOT_TOKEN')}",
+)
